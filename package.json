@@ -11,7 +11,8 @@
   "description": "",
   "workspaces": [
     "backend",
-    "api-types"
+    "api-types",
+    "frontend"
   ],
   "volta": {
     "node": "20.17.0"
