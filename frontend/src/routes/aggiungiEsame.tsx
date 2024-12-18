@@ -1,26 +1,13 @@
 
 import { useState } from "react";
-import { Esame } from "../../../api-types/esame";
+import { Esame, Materia } from "../../../api-types/esame";
 import { faker } from '@faker-js/faker';
+import { Box, Button, Input, FormLabel, Typography  } from '@mui/joy';
 
 
 export const AddExam: React.FC = () => {
-    const [esame, setEsame] = useState<Esame>({} as Esame);
-
-    const addEsame = () => {
-        setEsame({ ...esame, studente: nomeStudente, materie: materie}),
-
-        fetch("http://localhost:3000/esami", {
-        method: "POST",
-        body: JSON.stringify(esame),
-        headers: { "Content-Type": "application/json" },
-        })
-        .then((response) => response.json())
-        .then((data) => console.log(data));
-    };
-
     const getMaterie = () => {
-        const materie = [];
+        const materie:Array<Materia>= [];
 
         for (let index = 0; index < Math.floor(Math.random() * 10) + 1; index++) {
             materie.push({
@@ -32,22 +19,40 @@ export const AddExam: React.FC = () => {
         return materie;
     }
 
-    const nomeStudente = faker.person.fullName();
-    const materie = getMaterie();
+    const [esame, setEsame] = useState<Partial<Esame>>({
+        studente: faker.person.fullName(),
+        materie: getMaterie()
+    } );
+
+    const addEsame = () => {
+        fetch("http://localhost:3000/esami", {
+            method: "POST",
+            body: JSON.stringify(esame),
+            headers: { "Content-Type": "application/json" },
+        })
+        .then((response) => response.json())
+        .then((data) => console.log(data));
+    };
 
     return (
         <>
-        <div>
-          <form>
-            <label>
-                Studente : {nomeStudente} <br></br>
-                Materie: {materie.map(materia => materia).join(", ")} <br></br>
-            </label>
-          </form>
-        </div>
-        <div className="card">
-            <button onClick={addEsame}>Aggiungi un esame</button>
-        </div>
+        <Typography level="h1" sx={{ mb: 5 }}>Aggiungi esame</Typography>
+        <Box component="form" onSubmit={addEsame} sx={{ display: 'flex', flexDirection: 'column', gap: 2, border: '1px solid #c4c4c4', borderRadius: '5px', padding: 2}}>
+            <FormLabel>Nome</FormLabel>
+            <Input
+                placeholder = "Inserisci nome"
+                name="nome"
+                value={esame.studente}
+                onChange={(e) => setEsame({ ...esame, studente: e.target.value })}
+            />
+            <FormLabel>Materie</FormLabel>
+            <Box sx={{ backgroundColor: '#f5f5f5', padding: 2, borderRadius: 1 }}>
+                <Typography component="pre" sx={{ fontFamily: 'monospace', whiteSpace: 'pre-wrap' }}>
+                    {JSON.stringify(esame.materie, null, 2)}
+                </Typography>
+            </Box>
+            <Button type="submit">Submit</Button>
+        </Box>
       </>
     );
 };
