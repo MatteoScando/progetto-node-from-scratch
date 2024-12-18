@@ -10,6 +10,7 @@ router.post("/", async (ctx) => {
     ctx.accepts("json");
     console.log(ctx.request.body)
     const response = await inserisciEsame(ctx.request.body as Esame);
+    console.log(response);
     ctx.response.body = response;
 });
 

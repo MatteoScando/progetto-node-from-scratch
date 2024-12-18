@@ -22,8 +22,8 @@ const esameSchema = new DB.Schema<Esame>({
 const EsameModel = DB.model("esame", esameSchema);
 
 export const inserisciEsame = async (esame:Esame) =>{
-    const nuvoEesame = new EsameModel(esame);
-    return nuvoEesame.save();
+    const nuvoEsame = new EsameModel(esame);
+    return nuvoEsame.save();
 };
 
 export const ottieniEsami = async () => {
