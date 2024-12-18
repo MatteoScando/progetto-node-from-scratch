@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { Esame, Materia } from "../../../api-types/esame";
 import { faker } from '@faker-js/faker';
@@ -7,7 +6,7 @@ import { Box, Button, Input, FormLabel, Typography  } from '@mui/joy';
 
 export const AddExam: React.FC = () => {
     const getMaterie = () => {
-        const materie:Array<Materia>= [];
+        const materie:Materia[] = [];
 
         for (let index = 0; index < Math.floor(Math.random() * 10) + 1; index++) {
             materie.push({
@@ -19,6 +18,7 @@ export const AddExam: React.FC = () => {
         return materie;
     }
 
+    // const [esame, setEsame] = useState<Partial<Esame>>({});
     const [esame, setEsame] = useState<Partial<Esame>>({
         studente: faker.person.fullName(),
         materie: getMaterie()
@@ -35,7 +35,7 @@ export const AddExam: React.FC = () => {
     };
 
     return (
-        <>
+    <>
         <Typography level="h1" sx={{ mb: 5 }}>Aggiungi esame</Typography>
         <Box component="form" method="POST" onSubmit={addEsame} sx={{ display: 'flex', flexDirection: 'column', gap: 2, border: '1px solid #c4c4c4', borderRadius: '5px', padding: 2}}>
             <FormLabel>Nome</FormLabel>
@@ -53,6 +53,6 @@ export const AddExam: React.FC = () => {
             </Box>
             <Button type="submit">Submit</Button>
         </Box>
-      </>
+    </>
     );
 };
