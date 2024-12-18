@@ -37,7 +37,7 @@ export const AddExam: React.FC = () => {
     return (
         <>
         <Typography level="h1" sx={{ mb: 5 }}>Aggiungi esame</Typography>
-        <Box component="form" onSubmit={addEsame} sx={{ display: 'flex', flexDirection: 'column', gap: 2, border: '1px solid #c4c4c4', borderRadius: '5px', padding: 2}}>
+        <Box component="form" method="POST" onSubmit={addEsame} sx={{ display: 'flex', flexDirection: 'column', gap: 2, border: '1px solid #c4c4c4', borderRadius: '5px', padding: 2}}>
             <FormLabel>Nome</FormLabel>
             <Input
                 placeholder = "Inserisci nome"
