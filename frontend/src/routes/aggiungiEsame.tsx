@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Esame, Materia } from "../../../api-types/esame";
-import { faker } from '@faker-js/faker';
 import { Box, Button, Input, FormLabel, Typography  } from '@mui/joy';
+// import { faker } from '@faker-js/faker';
 
 
 export const AddExam: React.FC = () => {
@@ -21,9 +21,11 @@ export const AddExam: React.FC = () => {
     // const [esame, setEsame] = useState<Partial<Esame>>({
     //     studente: faker.person.fullName(),
     //     materie: getMaterie()
-    // } );
+    // });
 
-    const [esame, setEsame] = useState<Partial<Esame>>({});
+    const [esame, setEsame] = useState<Partial<Esame>>({ 
+        materie: [{nome: "NodeJS", voto: 8},{nome: "React", voto: 7}] as Materia[]
+    });
 
     const addEsame = () => {
         fetch("http://localhost:3000/esami", {
