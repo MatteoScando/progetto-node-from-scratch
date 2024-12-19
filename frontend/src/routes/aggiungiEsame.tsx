@@ -5,24 +5,25 @@ import { Box, Button, Input, FormLabel, Typography  } from '@mui/joy';
 
 
 export const AddExam: React.FC = () => {
-    const getMaterie = () => {
-        const materie:Materia[] = [];
+    // const getMaterie = () => {
+    //     const materie:Materia[] = [];
 
-        for (let index = 0; index < Math.floor(Math.random() * 10) + 1; index++) {
-            materie.push({
-                nome: faker.lorem.word(),
-                voto: Math.floor(Math.random() * 10) + 1,
-            });
-        }
+    //     for (let index = 0; index < Math.floor(Math.random() * 10) + 1; index++) {
+    //         materie.push({
+    //             nome: faker.lorem.word(),
+    //             voto: Math.floor(Math.random() * 10) + 1,
+    //         });
+    //     }
 
-        return materie;
-    }
+    //     return materie;
+    // }
 
-    // const [esame, setEsame] = useState<Partial<Esame>>({});
-    const [esame, setEsame] = useState<Partial<Esame>>({
-        studente: faker.person.fullName(),
-        materie: getMaterie()
-    } );
+    // const [esame, setEsame] = useState<Partial<Esame>>({
+    //     studente: faker.person.fullName(),
+    //     materie: getMaterie()
+    // } );
+
+    const [esame, setEsame] = useState<Partial<Esame>>({});
 
     const addEsame = () => {
         fetch("http://localhost:3000/esami", {
